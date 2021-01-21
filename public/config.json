@@ -123,5 +123,10 @@
 				"outArguments": []
 			}
 		}
+	},
+	"edit": {
+		"url": "https://custom-update-contact-activity.herokuapp.com/index.html",
+		"height": 200,
+		"width": 500
 	}
 }
