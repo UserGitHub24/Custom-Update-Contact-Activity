@@ -4,7 +4,7 @@
 		"icon": "images/icon.PNG",
 		"iconSmall": "images/icon_small.PNG"
 	},
-	"type": "DataExtensionUpdate",
+	"type": "DATAEXTENSIONUPDATE",
 	"lang": {
 		"en-US": {
 			"name": "Custom Update Contact",
