@@ -57,12 +57,13 @@
 	},
 	"wizardSteps": [
 	{ "label": "Step 1", "key": "step1", "active": false }
-	],
+	],	
 	"userInterfaces": {
-		"configModal": {
-			"height": 200,
-			"width": 300,
-			"fullscreen": true
+		"runningModal": {
+			"url": "runningModal.html"
+		},
+		"runningHover": {
+			"url": "runningHover.html"
 		}
 	},
 	"schema": {
