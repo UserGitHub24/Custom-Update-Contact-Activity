@@ -6,7 +6,7 @@
         "iconSmall": "images/iconSmall.png",
         "category": "Custom"
 	},
-	"type": "DataExtensionUpdate",
+	"type": "REST",
 	"lang": {
 		"en-US": {
 			"name": "Custom Update Contact",
