@@ -40,7 +40,7 @@
 		}
 	},
 	"wizardSteps": [
-		{"key": "step1", "label": "Step 1"}
+		{"key": "eventdefinitionkey", "label": "Event Definition Key"}
 	],	
 	"userInterfaces": {
 		"runningModal": {
