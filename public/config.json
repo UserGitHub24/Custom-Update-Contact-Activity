@@ -1,62 +1,46 @@
 {
-	"workflowApiVersion": "1.1",
 	"key": "a90c090e-52aa-4479-8acd-c5c9cd584596",
 	"metaData": {
-        "icon": "images/icon.png",
-        "iconSmall": "images/iconSmall.png",
-        "category": "Custom"
+		"icon": "images/icon.PNG",
+		"iconSmall": "images/icon_small.PNG"
 	},
 	"type": "REST",
 	"lang": {
 		"en-US": {
-			"name": "Custom Update Contact",
-			"description": "A custom Journey Builder activity using workflow API v1.1 format."
+			"name": "Custom Update Contact Test",
+			"description": "Custom Update activity which comes in use to update field's values"
 		}
 	},
-	"arguments": {
-		"execute": {
-			"inArguments": [{
-			  "contactId": "{{Contact.Key}}",
-			  "enrollmentID": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment ID}}",
-			  "enrollmentAttributeValue": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Value}}",
-			  "enrollmentAttributeType": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Type}}",
-			  "enrollmentAttributeSubType": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Sub Type}}",
-			  "enrollmentAttributeCode": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Code}}",
-			  "statusCode": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Status Code}}"
-			}],
-			"outArguments": [],
-			"timeout": 100000,
-			"retryCount": 1,
-			"retryDelay": 10000,
-			"concurrentRequests" : 5,
-			"url": "https://custom-update-contact-activity.herokuapp.com/execute"
-		}
-	},
+	"workflowApiVersion": "1.1",
 	"configurationArguments": {
-	"applicationExtensionKey": "a90c090e-52aa-4479-8acd-c5c9cd584596",
+		"applicationExtensionKey": "a90c090e-52aa-4479-8acd-c5c9cd584596",
 		"save": {
 			"url": "https://custom-update-contact-activity.herokuapp.com/activity/save",
-                        "verb": "POST",
-                        "useJwt": true
+			"verb": "POST",
+			"body": "",
+			"useJwt": true
 		},
 		"publish": {
 			"url": "https://custom-update-contact-activity.herokuapp.com/activity/publish",
-                        "verb": "POST",
-                        "useJwt": true
+			"verb": "POST",
+			"body": "",
+			"useJwt": true
 		},
 		"validate": {
-			"url": "https://custom-update-contact-activity.herokuapp.com/validate",
-                        "verb": "POST",
-                        "useJwt": true
+			"url": "https://custom-update-contact-activity.herokuapp.com/activity/validate",
+			"verb": "POST",
+			"body": "",
+			"useJwt": true
 		},
 		"stop": {
 			"url": "https://custom-update-contact-activity.herokuapp.com/activity/stop",
-                        "verb": "POST",
-                        "useJwt": true
+            "verb": "POST",
+			"body": "",
+            "useJwt": true
 		}
 	},
 	"wizardSteps": [
-	{ "label": "Step 1", "key": "step1", "active": false }
+		{"key": "eventdefinitionkey", "label": "Event Definition Key"}
 	],	
 	"userInterfaces": {
 		"runningModal": {
@@ -64,6 +48,29 @@
 		},
 		"runningHover": {
 			"url": "runningHover.html"
+		}
+	},
+	"arguments": {
+		"execute": {
+			"inArguments": [
+			 {
+			  "contactId": "{{Contact.Key}}",
+			  "enrollmentID": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment ID}}",
+			  "enrollmentAttributeValue": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Value}}",
+			  "enrollmentAttributeType": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Type}}",
+			  "enrollmentAttributeSubType": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Sub Type}}",
+			  "enrollmentAttributeCode": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Code}}",
+			  "statusCode": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Status Code}}"
+			}
+		],
+			"outArguments": [],
+			"url": "https://custom-update-contact-activity.herokuapp.com/activity/execute",
+			"verb": "POST",
+			"body": "",
+			"header": "",
+			"format": "json",
+			"useJwt": true,
+			"timeout": 90000
 		}
 	},
 	"schema": {
