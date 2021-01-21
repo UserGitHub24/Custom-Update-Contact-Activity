@@ -5,7 +5,7 @@ define(function (require) {
 	var connection = new Postmonger.Session();
 	var payload = {};
 	var steps = [
-		{'key': 'step1', 'label': 'Step 1'}
+		{'key': 'eventdefinitionkey', 'label': 'Event Definition Key'}
 	];
 	var currentStep = steps[0].key;
 
@@ -20,7 +20,7 @@ define(function (require) {
 	}
 
 	function onClickedNext () {
-		if (currentStep.key === 'step1') {
+		if (currentStep.key === 'eventdefinitionkey') {
 			save();
 		} else {
 			connection.trigger('nextStep');
@@ -46,7 +46,7 @@ define(function (require) {
 		$('.step').hide();
 
 		switch 	(currentStep.key) {
-		case 'step1':
+		case 'eventdefinitionkey':
 			$('#step1').show();
 			$('#step1 input').focus();
 			break;
@@ -54,12 +54,12 @@ define(function (require) {
 	}
 
 	function save () {
-		var step1 = $('#statusCode').val();
+		var eventDefinitionKey = $('#statusCode').val();
 
 		payload['arguments'] = payload['arguments'] || {};
 		payload['arguments'].execute = payload['arguments'].execute || {};
 		payload['arguments'].execute.inArguments = [{
-			'serviceCloudId': '{{Event.' + step1 + '.\"Contact:Id\"}}'
+			'serviceCloudId': '{{Event.' + eventDefinitionKey + '.\"Contact:Id\"}}'
 		}];
 
 		payload['metaData'] = payload['metaData'] || {};
