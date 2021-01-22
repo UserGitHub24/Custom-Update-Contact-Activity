@@ -55,15 +55,20 @@ define(function (require) {
 
     function save () {
 
-		
+	payload['arguments'] = payload['arguments'] || {};
+	payload['arguments'].execute = payload['arguments'].execute || {};
+	
+
+	payload['metaData'] = payload['metaData'] || {};
+	payload['metaData'].isConfigured = true;
+
+	console.log(JSON.stringify(payload));
+
 	connection.on('initActivity', function( payload ){
 	document.getElementById( 'statusCode' ).value = JSON.stringfy( payload, null, 2);
 	});
 
-
-		payload['metaData'] = payload['metaData'] || {};
-		payload['metaData'].isConfigured = true;
-		
+	
 	connection.on('clickedNext', function() {
 	var statusCode = JSON.parse ( document.getElementById( 'statusCode' ).value);
 	connection.trigger('updateActivity', statusCode);
