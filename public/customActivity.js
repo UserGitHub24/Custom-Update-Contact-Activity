@@ -1,12 +1,6 @@
-'use strict';
-
-define(function (require) {
-	var Postmonger = require('postmonger');
-	var connection = new Postmonger.Session();
+       var connection = new Postmonger.Session();
 	
-	$(window).ready(function () {
-		connection.trigger('ready');
-	});
+	connection.trigger('ready');
 
 	
 	connection.on('initActivity', function( data ){
@@ -18,8 +12,4 @@ define(function (require) {
 	connection.on('clickedNext', function() {
 	var statusCode = JSON.parse ( document.getElementById( 'statusCode' ).value);
 	connection.trigger('updateActivity', statusCode);
-
-	}
-	
- 
-});
+        });
