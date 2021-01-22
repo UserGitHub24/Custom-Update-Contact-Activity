@@ -16,9 +16,6 @@ define([
 	$(window).ready(onRender);
 
     connection.on('initActivity', initialize);
-    connection.on('requestedTokens', onGetTokens);
-    connection.on('requestedEndpoints', onGetEndpoints);
-
     connection.on('clickedNext', onClickedNext);
     connection.on('clickedBack', onClickedBack);
     connection.on('gotoStep', onGotoStep);
@@ -27,15 +24,13 @@ define([
         // JB will respond the first time 'ready' is called with 'initActivity'
         connection.trigger('ready');
 
-        connection.trigger('requestTokens');
-        connection.trigger('requestEndpoints');
 
 	function initialize (data) {
 		if (data) {
 			payload = data;
 		}
 	}
-
+   
    var hasInArguments = Boolean(
 	 payload['arguments'] &&
 	 payload['arguments'].execute &&
@@ -50,7 +45,7 @@ define([
 	$.each(inArguments, function(index, inArgument) {
 	 $.each(inArgument function (key, val) {
 	 
-	 if (key === 'statusCode')
+	 if (key === 'message')
 	 {
 	   $('#statusCode').val(val);
 	   
@@ -59,7 +54,11 @@ define([
 	 });
 	 
 	});
-	
+	connection.trigger('updateButton', {
+            button: 'next',
+            text: 'done',
+            visible: true
+        });
 	
 	function onClickedNext () {
 		if (currentStep.key === 'eventdefinitionkey') {
@@ -92,9 +91,9 @@ define([
 		case 'eventdefinitionkey':
 			$('#step1').show();
 			connection.trigger('updateButton', {
-            button: 'next',
-            text: 'done',
-            visible: true
+                        button: 'next',
+                        text: 'done',
+                        visible: true
         });
 			break;
 		}
@@ -105,12 +104,12 @@ define([
 		var statusCode = $('#statusCode').val();
 
 		payload['arguments'].execute.inArguments = [{
-			"statusCode": statusCode
+			"message": statusCode
 		}];
 
 		payload['metaData'].isConfigured = true;
 
-		console.log(JSON.stringify(payload));
+		console.log(payload);
 
 		connection.trigger('updateActivity', payload);
 	}
