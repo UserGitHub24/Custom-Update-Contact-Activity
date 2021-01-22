@@ -63,7 +63,7 @@ define(function (require) {
 	var statusCode = JSON.parse ( document.getElementById( 'statusCode' ).value);
 	connection.trigger('updateActivity', statusCode);
         });
-	}
+	
 
 	connection.on('initActivity', initialize);
 	connection.on('clickedNext', onClickedNext);
