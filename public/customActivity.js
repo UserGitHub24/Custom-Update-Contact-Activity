@@ -20,8 +20,10 @@ define(function (require) {
 	}
 
 	function onClickedNext () {
-       	if (payload) {
-			Save();
+		if (currentStep.key === 'eventdefinitionkey') {
+			save();
+		} else {
+			connection.trigger('nextStep');
 		}
 	}
 
