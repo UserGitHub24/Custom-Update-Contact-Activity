@@ -16,57 +16,23 @@ define([
 	$(window).ready(onRender);
 
     connection.on('initActivity', initialize);
-    connection.on('clickedNext', onClickedNext);
     connection.on('clickedBack', onClickedBack);
     connection.on('gotoStep', onGotoStep);
+	
+    connection.on('clickedNext', save);
 
     function onRender() {
         // JB will respond the first time 'ready' is called with 'initActivity'
         connection.trigger('ready');
 
-
+    }
 	function initialize (data) {
 		if (data) {
 			payload = data;
 		}
 	}
    
-   var hasInArguments = Boolean(
-	 payload['arguments'] &&
-	 payload['arguments'].execute &&
-	 payload['arguments'].execute.inArguments &&
-	 payload['arguments'].execute.inArguments.length > 0
-	);
-
-	var inArguments = hasInArguments ? payload['arguments'].execute.inArguments : {};
-	
-	console.log(inArguments);
-	
-	$.each(inArguments, function(index, inArgument) {
-	 $.each(inArgument function (key, val) {
-	 
-	 if (key === 'eventdefinitionkey')
-	 {
-	   $('#statusCode').val(val);
-	   
-	 }
-	 
-	 });
-	 
-	});
-	connection.trigger('updateButton', {
-            button: 'next',
-            text: 'done',
-            visible: true
-        });
-	
-	function onClickedNext () {
-		if (currentStep.key === 'eventdefinitionkey') {
-			save();
-		} else {
-			connection.trigger('nextStep');
-		}
-	}
+  
 
 	function onClickedBack () {
 		connection.trigger('prevStep');
@@ -91,9 +57,9 @@ define([
 		case 'eventdefinitionkey':
 			$('#step1').show();
 			connection.trigger('updateButton', {
-            button: 'next',
-            text: 'done',
-            visible: true
+                         button: 'next',
+                         text: 'done',
+                         visible: true
         });
 			break;
 		}
