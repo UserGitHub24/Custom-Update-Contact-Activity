@@ -20,63 +20,62 @@ define(function (require) {
 	}
 
 	function onClickedNext () {
-		if (currentStep.key === 'eventdefinitionkey') {
-			save();
-		} else {
-			connection.trigger('nextStep');
+       	save();
 		}
-	}
 
 	function onClickedBack () {
 		connection.trigger('prevStep');
 	}
 
-	function onGotoStep (step) {
-		showStep(step);
-		connection.trigger('ready');
-	}
+     var hasInArguments = Boolean(
+	 payload['arguments'] &&
+	 payload['arguments'].execute &&
+	 payload['arguments'].execute.inArguments &&
+	 payload['arguments'].execute.inArguments.length > 0
+	);
 
-	function showStep (step, stepIndex) {
-		if (stepIndex && !step) {
-			step = steps[stepIndex - 1];
-		}
-
-		currentStep = step;
-
-		$('.step').hide();
-
-		switch 	(currentStep.key) {
-		case 'eventdefinitionkey':
-			$('#step1').show();
-			$('#step1 input').focus();
-			break;
-		}
-	}
-
-    function save () {
-
-	payload['arguments'] = payload['arguments'] || {};
-	payload['arguments'].execute = payload['arguments'].execute || {};
-	payload['metaData'] = payload['metaData'] || {};
-
-
-
-	connection.on('initActivity', function( payload ){
-	document.getElementById( 'statusCode' ).value = JSON.stringfy( payload, null, 2);
+	var inArguments = hasInArguments ? payload['arguments'].execute.inArguments : {};
+	
+	console.log(inArguments);
+	
+	$.each(inArguments, function(index, inArgument) {
+	 $.each(inArgument function (key, val) {
+	 
+	 if (key === 'statusCode')
+	 {
+	   $('#statusCode').val(val);
+	   
+	 }
+	 
+	 });
+	 
 	});
 
-	
-	payload['metaData'].isConfigured = true;
+   connection.trigger('updateButton', {
+   button: 'next',
+   text: 'done',
+   visible: true
+   
+   });
 
-	
-	connection.on('clickedNext', function() {
-	var statusCode = JSON.parse ( document.getElementById( 'statusCode' ).value);
-	connection.trigger('updateActivity', statusCode);
-        });
-	
-  }
+	function save () {
+		var statusCode = $('#statusCode').val();
+
+		payload['arguments'] = payload['arguments'] || {};
+		payload['arguments'].execute = payload['arguments'].execute || {};
+		payload['arguments'].execute.inArguments = [{
+			"statusCode": statusCode
+		}];
+
+		payload['metaData'].isConfigured = true;
+
+		console.log(JSON.stringify(payload));
+
+		connection.trigger('updateActivity', payload);
+	}
+
 	connection.on('initActivity', initialize);
 	connection.on('clickedNext', onClickedNext);
 	connection.on('clickedBack', onClickedBack);
-	connection.on('gotoStep', onGotoStep);
+
 });
