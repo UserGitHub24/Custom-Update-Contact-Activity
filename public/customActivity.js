@@ -53,6 +53,7 @@ define(function (require) {
 		}
 	}
 
+    function save () {
 	connection.on('initActivity', function( payload ){
 	document.getElementById( 'statusCode' ).value = JSON.stringfy( payload, null, 2);
 	});
@@ -64,7 +65,7 @@ define(function (require) {
 	connection.trigger('updateActivity', statusCode);
         });
 	
-
+  }
 	connection.on('initActivity', initialize);
 	connection.on('clickedNext', onClickedNext);
 	connection.on('clickedBack', onClickedBack);
