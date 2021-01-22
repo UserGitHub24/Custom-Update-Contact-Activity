@@ -41,15 +41,7 @@
 	},
 	"wizardSteps": [
 		{"key": "eventdefinitionkey", "label": "Event Definition Key"}
-	],	
-	"userInterfaces": {
-		"runningModal": {
-			"url": "runningModal.html"
-		},
-		"runningHover": {
-			"url": "runningHover.html"
-		}
-	},
+	],
 	"arguments": {
 		"execute": {
 			"inArguments": [
@@ -130,5 +122,10 @@
 				"outArguments": []
 			}
 		}
+	},
+	"edit": {
+		"url": "https://custom-update-contact-activity.herokuapp.com/index.html",
+		"height": 200,
+		"width": 500
 	}
 }
