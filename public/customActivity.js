@@ -3,24 +3,14 @@
 define(function (require) {
 	var Postmonger = require('postmonger');
 	var connection = new Postmonger.Session();
-	var payload = {};
-	var steps = [
-		{'key': 'eventdefinitionkey', 'label': 'Event Definition Key'}
-	];
-	var currentStep = steps[0].key;
-
+	
 	$(window).ready(function () {
 		connection.trigger('ready');
 	});
 
-	function initialize (data) {
-		if (data) {
-			payload = data;
-		}
-	}
 	
-	connection.on('initActivity', function( payload ){
-	document.getElementById( 'statusCode' ).value = JSON.stringfy( payload, null, 2);
+	connection.on('initActivity', function( data ){
+	document.getElementById( 'statusCode' ).value = JSON.stringfy( data, null, 2);
 	});
 
 
@@ -31,5 +21,5 @@ define(function (require) {
 
 	}
 	
-    connection.on('initActivity', initialize);
+ 
 });
