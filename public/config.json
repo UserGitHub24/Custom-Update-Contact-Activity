@@ -42,6 +42,14 @@
 	"wizardSteps": [
 		{"key": "eventdefinitionkey", "label": "Event Definition Key"}
 	],
+	"userInterfaces": {
+		"runningModal": {
+			"url": "runningModal.html"
+		},
+		"runningHover": {
+			"url": "runningHover.html"
+		}
+	},
 	"arguments": {
 		"execute": {
 			"inArguments": [
