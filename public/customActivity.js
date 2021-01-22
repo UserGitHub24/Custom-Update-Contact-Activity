@@ -58,8 +58,6 @@ define(function (require) {
 	function save () {
 		var statusCode = $('#statusCode').val();
 
-		payload['arguments'] = payload['arguments'] || {};
-		payload['arguments'].execute = payload['arguments'].execute || {};
 		payload['arguments'].execute.inArguments = [{
 			"statusCode": statusCode
 		}];
