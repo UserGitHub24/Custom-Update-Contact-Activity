@@ -70,7 +70,13 @@ define([
 		var statusCode = $('#statusCode').val();
 
 		payload['arguments'].execute.inArguments = [{
-			"statusCode": statusCode
+			"statusCode": statusCode,
+			"contactId": "{{Contact.Key}}",
+			"enrollmentID": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment ID}}",
+			"enrollmentAttributeValue": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Value}}",
+			"enrollmentAttributeType": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Type}}",
+			"enrollmentAttributeSubType": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Sub Type}}",
+			"enrollmentAttributeCode": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Code}}"
 		}];
 
 		payload['metaData'].isConfigured = true;
