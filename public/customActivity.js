@@ -69,7 +69,7 @@ define(function (require) {
 	$.each(inArguments, function(index, inArgument) {
 	 $.each(inArgument function (key, val) {
 	 
-	 if (key === 'statusCode')
+	 if (key === 'eventdefinitionkey')
 	 {
 	   $('#statusCode').val(val);
 	   
