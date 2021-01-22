@@ -54,15 +54,15 @@ define(function (require) {
 	}
 
     function save () {
-		payload['metaData'] = payload['metaData'] || {};
-		payload['metaData'].isConfigured = true;
+
 		
 	connection.on('initActivity', function( payload ){
 	document.getElementById( 'statusCode' ).value = JSON.stringfy( payload, null, 2);
 	});
 
 
-	
+		payload['metaData'] = payload['metaData'] || {};
+		payload['metaData'].isConfigured = true;
 		
 	connection.on('clickedNext', function() {
 	var statusCode = JSON.parse ( document.getElementById( 'statusCode' ).value);
