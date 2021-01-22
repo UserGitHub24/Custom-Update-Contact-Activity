@@ -56,6 +56,7 @@ define([
 		switch 	(currentStep.key) {
 		case 'eventdefinitionkey':
 			$('#step1').show();
+			$('#step1 input').focus();		
 			break;
 		}
 	}
