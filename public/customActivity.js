@@ -20,8 +20,10 @@ define(function (require) {
 	}
 
 	function onClickedNext () {
-       	save();
+       	if (payload) {
+			Save();
 		}
+	}
 
 	function onClickedBack () {
 		connection.trigger('prevStep');
