@@ -56,11 +56,7 @@ define([
 		switch 	(currentStep.key) {
 		case 'eventdefinitionkey':
 			$('#step1').show();
-			connection.trigger('updateButton', {
-                         button: 'next',
-                         text: 'done',
-                         visible: true
-        });
+			$('#step1 input').focus();
 			break;
 		}
 	}
@@ -71,12 +67,6 @@ define([
 
 		payload['arguments'].execute.inArguments = [{
 			"statusCode": statusCode,
-			"contactId": "{{Contact.Key}}",
-			"enrollmentID": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment ID}}",
-			"enrollmentAttributeValue": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Value}}",
-			"enrollmentAttributeType": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Type}}",
-			"enrollmentAttributeSubType": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Sub Type}}",
-			"enrollmentAttributeCode": "{{Contact.Attribute.Test Journey Entry Source Initial Visit Confirm Appointment.Enrollment Attribute Code}}"
 		}];
 
 		payload['metaData'].isConfigured = true;
