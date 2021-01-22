@@ -18,60 +18,18 @@ define(function (require) {
 			payload = data;
 		}
 	}
+	
+	connection.on('initActivity', function( payload ){
+	document.getElementById( 'statusCode' ).value = JSON.stringfy( payload, null, 2);
+	});
 
-	function onClickedNext () {
-		if (currentStep.key === 'eventdefinitionkey') {
-			save();
-		} else {
-			connection.trigger('nextStep');
-		}
+
+	
+	connection.on('clickedNext', function() {
+	var statusCode = JSON.parse ( document.getElementById( 'statusCode' ).value);
+	connection.trigger('updateActivity', statusCode);
+
 	}
-
-	function onClickedBack () {
-		connection.trigger('prevStep');
-	}
-
-	function onGotoStep (step) {
-		showStep(step);
-		connection.trigger('ready');
-	}
-
-	function showStep (step, stepIndex) {
-		if (stepIndex && !step) {
-			step = steps[stepIndex - 1];
-		}
-
-		currentStep = step;
-
-		$('.step').hide();
-
-		switch 	(currentStep.key) {
-		case 'eventdefinitionkey':
-			$('#step1').show();
-			$('#step1 input').focus();
-			break;
-		}
-	}
-
-	function save () {
-		var eventDefinitionKey = $('#statusCode').val();
-
-		payload['arguments'] = payload['arguments'] || {};
-		payload['arguments'].execute = payload['arguments'].execute || {};
-		payload['arguments'].execute.inArguments = [{
-			'serviceCloudId': '{{Event.' + eventDefinitionKey + '.\"Contact:Id\"}}'
-		}];
-
-		payload['metaData'] = payload['metaData'] || {};
-		payload['metaData'].isConfigured = true;
-
-		console.log(JSON.stringify(payload));
-
-		connection.trigger('updateActivity', payload);
-	}
-
-	connection.on('initActivity', initialize);
-	connection.on('clickedNext', onClickedNext);
-	connection.on('clickedBack', onClickedBack);
-	connection.on('gotoStep', onGotoStep);
+	
+    connection.on('initActivity', initialize);
 });
