@@ -1,10 +1,60 @@
-       var connection = new Postmonger.Session();
-	
-	connection.trigger('ready');
+'use strict';
 
-	
-	connection.on('initActivity', function( data ){
-	document.getElementById( 'statusCode' ).value = JSON.stringfy( data, null, 2);
+define(function (require) {
+	var Postmonger = require('postmonger');
+	var connection = new Postmonger.Session();
+	var payload = {};
+	var steps = [
+		{'key': 'eventdefinitionkey', 'label': 'Event Definition Key'}
+	];
+	var currentStep = steps[0].key;
+
+	$(window).ready(function () {
+		connection.trigger('ready');
+	});
+
+	function initialize (data) {
+		if (data) {
+			payload = data;
+		}
+	}
+
+	function onClickedNext () {
+		if (currentStep.key === 'eventdefinitionkey') {
+			save();
+		} else {
+			connection.trigger('nextStep');
+		}
+	}
+
+	function onClickedBack () {
+		connection.trigger('prevStep');
+	}
+
+	function onGotoStep (step) {
+		showStep(step);
+		connection.trigger('ready');
+	}
+
+	function showStep (step, stepIndex) {
+		if (stepIndex && !step) {
+			step = steps[stepIndex - 1];
+		}
+
+		currentStep = step;
+
+		$('.step').hide();
+
+		switch 	(currentStep.key) {
+		case 'eventdefinitionkey':
+			$('#step1').show();
+			$('#step1 input').focus();
+			break;
+		}
+	}
+
+	connection.on('initActivity', function( payload ){
+	document.getElementById( 'statusCode' ).value = JSON.stringfy( payload, null, 2);
 	});
 
 
@@ -13,3 +63,10 @@
 	var statusCode = JSON.parse ( document.getElementById( 'statusCode' ).value);
 	connection.trigger('updateActivity', statusCode);
         });
+	}
+
+	connection.on('initActivity', initialize);
+	connection.on('clickedNext', onClickedNext);
+	connection.on('clickedBack', onClickedBack);
+	connection.on('gotoStep', onGotoStep);
+});
