@@ -66,7 +66,7 @@ define([
 		var statusCode = $('#statusCode').val();
 
 		payload['arguments'].execute.inArguments = [{
-			"statusCode": statusCode,
+			"Status Code": statusCode,
 		}];
 
 		payload['metaData'].isConfigured = true;
